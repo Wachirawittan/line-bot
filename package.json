@@ -1,5 +1,5 @@
 {
-  "name": "line-bot-nodejs-starter",
+  "name": "line-bot",
   "version": "1.0.0",
   "description": "starter point to create new line bot project",
   "main": "index.js",
@@ -12,8 +12,7 @@
     "bot",
     "messaging-api"
   ],
-  "author": "Sitthi Thiammekha",
-  "license": "ISC",
+  "author": "Wachirawit",
   "devDependencies": {
     "eslint": "^5.14.1",
     "eslint-config-standard": "^12.0.0",
