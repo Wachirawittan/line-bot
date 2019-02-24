@@ -1,5 +1,5 @@
 {
-  "port" : "80",
+  "port" : process.env.PORT,
   "channelAccessToken": "GpnH4GL8GOAGUrUNFuMqG+4TYJFaMGfq+8sEQ8xuIcV07L1Zij4RhdFQw4Q+xHDMpxF905xha+FDrU0b8mn2fY3LSJ+Jpp+/v6ahJkdBh3Li5aJ5XoB5i+QBUv0Ae8EDIT8JrNhs8HIPnYqC2vLatAdB04t89/1O/w1cDnyilFU=",
   "channelSecret": "928bc5ee604c0fe5ab514a97f8e04b24"
 }
