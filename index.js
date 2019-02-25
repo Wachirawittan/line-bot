@@ -116,19 +116,19 @@ function handleSticker(message, replyToken) {
 const port = process.env.PORT;
 
 
-client.on("error", function (err) {
+redis_client.on("error", function (err) {
     console.log("Error " + err);
 });
 
-client.set("string key", "string val", redis.print);
-client.hset("hash key", "hashtest 1", "some value", redis.print);
-client.hset(["hash key", "hashtest 2", "some other value"], redis.print);
-client.hkeys("hash key", function (err, replies) {
+redis_client.set("string key", "string val", redis.print);
+redis_client.hset("hash key", "hashtest 1", "some value", redis.print);
+redis_client.hset(["hash key", "hashtest 2", "some other value"], redis.print);
+redis_client.hkeys("hash key", function (err, replies) {
     console.log(replies.length + " replies:");
     replies.forEach(function (reply, i) {
         console.log("    " + i + ": " + reply);
     });
-    client.quit();
+    redis_client.quit();
 });
 
 app.listen(port, () => {
