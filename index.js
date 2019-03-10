@@ -6,7 +6,8 @@ const config = require('./config.json');
 
 // create LINE SDK client
 const client = new line.Client(config);
-
+var redis = require("redis"),
+    redis_client = redis.createClient(process.env.REDIS_URL);
 const app = express();
 
 // webhook callback
@@ -112,7 +113,7 @@ function handleSticker(message, replyToken) {
   return replyText(replyToken, 'Got Sticker');
 }
 
-const port = config.port;
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
