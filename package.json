@@ -25,6 +25,7 @@
     "@line/bot-sdk": "^6.2.1",
     "balanced-match": "^1.0.0",
     "express": "^4.16.3",
+    "package": "^1.0.1",
     "redis": "^2.8.0"
   }
 }

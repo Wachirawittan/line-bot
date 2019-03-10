@@ -8,7 +8,6 @@ const config = require('./config.json');
 const client = new line.Client(config);
 const app = express();
 //var redis_client = require('redis').createClient(process.env.REDIS_URL);
-
 var url   = require('url');
 var Redis = require('ioredis');
 redis_uri = url.parse(process.env.REDIS_URL);
