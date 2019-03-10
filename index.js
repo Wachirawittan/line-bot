@@ -9,7 +9,7 @@ const client = new line.Client(config);
 const app = express();
 //var redis_client = require('redis').createClient(process.env.REDIS_URL);
 var redis = require('redis');
-var redis_Client = redis.createClient({host : 'localhost', port : 6379});
+var redis_Client = redis.createClient({host : 'ec2-3-208-193-158.compute-1.amazonaws.com', port : 23629});
 
 redis_Client.on('ready',function() {
  console.log("Redis is ready");
