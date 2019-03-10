@@ -60,7 +60,6 @@ function handleEvent(event) {
             testText = reply.toString();
           });
           console.log('//////////////');
-          redis.end();
           if(testText=='' || testText == null  || testText){
             return handleText(message, event.replyToken);
           }
