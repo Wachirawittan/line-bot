@@ -23,7 +23,7 @@ var redis = new Redis({
   }
 });
 
-var redis_client = require('redis').createClient();
+var redis_client = redis.createClient();
 
 // webhook callback
 app.post('/webhook', line.middleware(config), (req, res) => {
