@@ -90,8 +90,16 @@ function handleEvent(event) {
 }
 
 function handleText(message, replyToken) {
-
-  return replyText(replyToken, "พีสะเดิด");
+  if(redis_client.get(message.text)===''){
+    return replyText(replyToken, message.text);
+  }else {
+      reply = client.get(message.text, function(error, result) {
+        if (error) throw error;
+        console.log('GET result ->', result)
+      });
+      return replyText(replyToken, reply);
+  }
+  return replyText(replyToken, message.text);
 }
 
 function handleImage(message, replyToken) {
