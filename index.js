@@ -7,23 +7,16 @@ const config = require('./config.json');
 // create LINE SDK client
 const client = new line.Client(config);
 const app = express();
-//var redis_client = require('redis').createClient(process.env.REDIS_URL);
-var url   = require('url');
-var Redis = require('redis');
-var redis_uri = url.parse(process.env.REDIS_URL);
-var redis = new Redis({
-  port: Number(redis_uri.port) + 1,
-  host: redis_uri.hostname,
-  password: redis_uri.auth.split(':')[1],
-  db: 0,
-  tls: {
-    rejectUnauthorized: false,
-    requestCert: true,
-    agent: false
-  }
-});
+// var redis_client = require('redis').createClient(process.env.REDIS_URL);
 
+var connect = require('connect'),
+    RedisStore = require('connect-redis')(connect),
+    redis = require('heroku-redis-client');
 
+connect.createServer(
+    connect.cookieParser(),
+    connect.session({ store: new RedisStore({ client: redis.createClient() }), secret: 'keyboard cat' })
+);
 
 redis_Client.on('ready',function() {
  console.log("Redis is ready");
