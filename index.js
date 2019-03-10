@@ -35,7 +35,7 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 
 // simple reply function
 const replyText = (token, texts) => {
-  texts = "ผมชื่อพี";
+  texts = Array.isArray(texts) ? texts : [texts];
   return client.replyMessage(
     token,
     texts.map((text) => ({ type: 'text', text }))
