@@ -9,8 +9,7 @@ const client = new line.Client(config);
 const app = express();
 
 var rtg   = require("url").parse(process.env.REDIS_URL);
-var redis = require("redis");
-var redis_client = redis.createClient(rtg.port, rtg.hostname);
+var redis = require("redis").createClient(rtg.port, rtg.hostname);
 redis.auth(rtg.auth.split(":")[1]);
 
 
@@ -55,13 +54,13 @@ function handleEvent(event) {
         case 'text':
           var testText;
           console.log('//////////////');
-          redis_client.get(message.text, function (err, reply) {
+          redis.get(message.text, function (err, reply) {
             console.log(reply);
             console.log(reply.toString());
             testText = reply.toString();
           });
           console.log('//////////////');
-          redis_client.end();
+          redis.end();
           if(testText=='' || testText == null  || testText){
             return handleText(message, event.replyToken);
           }
