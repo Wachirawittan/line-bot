@@ -94,13 +94,13 @@ function handleText(message, replyToken) {
         console.log(error);
         throw error;
       }
-      message.text = result;
-      console.log('GET result ->' + message.text);
+      resultText= result;
+      console.log('GET result ->' + resultText);
     });
-    if(message.text=='' || message.text == null  || message.text){
-      return handleText(message, event.replyToken);
+    if(resultText=='' || resultText == null ){
+      return replyText(replyToken, message);
     }
-    return replyText(replyToken, message.text);
+    return replyText(replyToken, resultText);
 }
 
 function handleImage(message, replyToken) {
