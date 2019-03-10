@@ -33,14 +33,14 @@ app.post('/webhook', line.middleware(config), (req, res) => {
     });
 });
 
-// simple reply function
-const replyText = (token, texts) => {
-  texts = Array.isArray(texts) ? texts : [texts];
-  return client.replyMessage(
-    token,
-    texts.map((text) => ({ type: 'text', text }))
-  );
-};
+// // simple reply function
+// const replyText = (token, texts) => {
+//   texts = Array.isArray(texts) ? texts : [texts];
+//   return client.replyMessage(
+//     token,
+//     texts.map((text) => ({ type: 'text', text }))
+//   );
+// };
 
 // callback function to handle a single event
 function handleEvent(event) {
@@ -90,7 +90,8 @@ function handleEvent(event) {
 }
 
 function handleText(message, replyToken) {
-  return replyText(replyToken, message.text);
+
+  return replyText(replyToken, "พีสะเดิด");
 }
 
 function handleImage(message, replyToken) {
