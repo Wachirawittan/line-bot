@@ -11,7 +11,7 @@ const app = express();
 var rtg   = require("url").parse(process.env.REDIS_URL);
 var redis = require("redis").createClient(rtg.port, rtg.hostname);
 
-redis.auth(rtg.auth.split(":")[2]);
+redis.auth(rtg.auth.split(":")[1]);
 
 
 // webhook callback
