@@ -91,14 +91,8 @@ function handleEvent(event) {
 
 function handleText(message, replyToken) {
   input_text = message.text;
-  client.get(input_text, function(err, reply) {
-    if (reply==null) {
-      return replyText(replyToken, message.text);
-    }
-    console.log(reply);
-    return replyText(replyToken, reply);
-  });
-  return replyText(replyToken, message.text);
+
+  return replyText(replyToken, input_text);
 }
 
 function handleImage(message, replyToken) {
