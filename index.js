@@ -49,11 +49,13 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case 'text':
-          var testText ;
+          var testText;
+          console.log('//////////////');
           redis_client.get(message.text, function (err, reply) {
             console.log(reply.toString());
             testText = reply.toString();
           });
+          console.log('//////////////');
           redis_client.end();
           if(testText=='' || testText == null  || testText){
             return handleText(message, event.replyToken);
