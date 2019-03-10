@@ -11,11 +11,11 @@ const app = express();
 var redis = require('redis');
 var redis_Client = redis.createClient({host : 'localhost', port : 6379});
 
-redisClient.on('ready',function() {
+redis_Client.on('ready',function() {
  console.log("Redis is ready");
 });
 
-redisClient.on('error',function() {
+redis_Client.on('error',function() {
  console.log("Error in Redis");
 });
 
