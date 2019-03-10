@@ -13,7 +13,6 @@ var redis = require("redis").createClient(rtg.port, rtg.hostname);
 
 redis.auth(rtg.auth.split(":")[2]);
 
-var redis_client = redis.createClient();
 
 // webhook callback
 app.post('/webhook', line.middleware(config), (req, res) => {
