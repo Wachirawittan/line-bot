@@ -6,8 +6,10 @@ const config = require('./config.json');
 
 // create LINE SDK client
 const client = new line.Client(config);
-var redis_client = require('redis').createClient(process.env.REDIS_URL);
 const app = express();
+//var redis_client = require('redis').createClient(process.env.REDIS_URL);
+var redis = require("redis"),
+    redis_client = redis.createClient(null, null, {detect_buffers: true});
 
 // webhook callback
 app.post('/webhook', line.middleware(config), (req, res) => {
