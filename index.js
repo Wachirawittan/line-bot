@@ -61,8 +61,8 @@ function handleEvent(event) {
               console.log(error);
               throw error;
             }
-            console.log('GET result ->' + message.text);
-            resultText = "จำนวนแคลลอรี่ของ"+message.text+" เท่ากับ "+result;
+            resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+result;
+            console.log('GET result ->' + result);
             return replyText(event.replyToken, resultText);
           });
           if(message.text=='' || message.text == null  || message.text){
