@@ -62,10 +62,10 @@ function handleEvent(event) {
               console.log(error);
               throw error;
             }
-            resultText = result;
-            console.log('GET result ->' + resultText);
+            message.text = result;
+            console.log('GET result ->' + message.text);
           });
-          if(testText=='' || testText == null  || testText){
+          if(message.text=='' || message.text == null  || message.text){
             console.log(message);
             return handleText(message, event.replyToken);
           }
