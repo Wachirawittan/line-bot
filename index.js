@@ -7,8 +7,23 @@ const config = require('./config.json');
 // create LINE SDK client
 const client = new line.Client(config);
 const app = express();
-var redis_client = require('redis').createClient(process.env.REDIS_URL);
-console.log(process.env.REDIS_URL);
+
+var url   = require('url');
+var Redis = require('ioredis');
+redis_uri = url.parse(process.env.REDIS_URL);
+var redis = new Redis({
+  port: Number(redis_uri.port) + 1,
+  host: redis_uri.hostname,
+  password: redis_uri.auth.split(':')[2],
+  db: 0,
+  tls: {
+    rejectUnauthorized: false,
+    requestCert: true,
+    agent: false
+  }
+});
+
+var redis_client = require('redis').createClient();
 
 // webhook callback
 app.post('/webhook', line.middleware(config), (req, res) => {
