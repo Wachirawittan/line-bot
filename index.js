@@ -51,7 +51,9 @@ function handleEvent(event) {
         case 'text':
           var testText;
           console.log('//////////////');
+          console.log(redis_client.connect());
           redis_client.get(message.text, function (err, reply) {
+            console.log(reply);
             console.log(reply.toString());
             testText = reply.toString();
           });
