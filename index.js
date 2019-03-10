@@ -115,7 +115,6 @@ function handleSticker(message, replyToken) {
 
 const port = process.env.PORT;
 
-
 redis_client.on("error", function (err) {
     console.log("Error " + err);
 });
