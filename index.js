@@ -6,11 +6,7 @@ const config = require('./config.json');
 
 // create LINE SDK client
 const client = new line.Client(config);
-var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-var redis = require("redis").createClient(rtg.port, rtg.hostname);
-redis.auth(rtg.auth.split(":")[1]);
-// var redis = require("redis"),
-// redis_client = redis.createClient(process.env.REDISTOGO_URL);
+var redis_client = require('redis').createClient(process.env.REDIS_URL);
 const app = express();
 
 // webhook callback
@@ -54,7 +50,6 @@ function handleEvent(event) {
         case 'text':
           var testText;
           console.log('//////////////');
-          console.log(redis_client.connect());
           redis_client.get(message.text, function (err, reply) {
             console.log(reply);
             console.log(reply.toString());
