@@ -49,17 +49,16 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case 'text':
-          return handleText(message, event.replyToken);
-        case 'image':
-          return handleImage(message, event.replyToken);
-        case 'video':
-          return handleVideo(message, event.replyToken);
-        case 'audio':
-          return handleAudio(message, event.replyToken);
-        case 'location':
-          return handleLocation(message, event.replyToken);
-        case 'sticker':
-          return handleSticker(message, event.replyToken);
+          var testText ;
+          redis_client.get(message.text, function (err, reply) {
+            console.log(reply.toString());
+            testText = reply.toString();
+          });
+          redis_client.end();
+          if(testText=='' || testText == null  || testText){
+            return handleText(message, event.replyToken);
+          }
+          return handleText(testText, event.replyToken);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
@@ -92,7 +91,6 @@ function handleEvent(event) {
 
 
 function handleText(message, replyToken) {
-  input_text = message.text.toString();
   return replyText(replyToken, message.text);
 }
 
