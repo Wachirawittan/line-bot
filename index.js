@@ -57,9 +57,12 @@ function handleEvent(event) {
         case 'text':
           var testText;
           console.log('//////////////');
-          redis.get(message.text, function (err, reply) {
-            console.log(reply);
-            testText;
+          redis.get(message.text, function (error, result) {
+            if (error) {
+              console.log(error);
+              throw error;
+            }
+            console.log('GET result ->' + result);
           });
           if(testText=='' || testText == null  || testText){
             return handleText(message, event.replyToken);
