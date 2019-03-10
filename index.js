@@ -6,8 +6,7 @@ const express = require('express');
 const config = require('./config.json');
 // create LINE SDK client
 const client = new line.Client(config);
-var redis = require("redis"),
-    redis_client = redis.createClient(process.env.REDIS_URL);
+
 const app = express();
 
 // webhook callback
@@ -42,26 +41,14 @@ const replyText = (token, texts) => {
   );
 };
 
-// callback function to handle a single event
 function handleEvent(event) {
   switch (event.type) {
     case 'message':
       const message = event.message;
       switch (message.type) {
         case 'text':
-          return handleText(message, event.replyToken);
-        case 'image':
-          return handleImage(message, event.replyToken);
-        case 'video':
-          return handleVideo(message, event.replyToken);
-        case 'audio':
-          return handleAudio(message, event.replyToken);
-        case 'location':
-          return handleLocation(message, event.replyToken);
-        case 'sticker':
-          return handleSticker(message, event.replyToken);
-        default:
-          throw new Error(`Unknown message: ${JSON.stringify(message)}`);
+
+          return handleText("พีสะเดิด", event.replyToken);
       }
 
     case 'follow':
@@ -113,23 +100,7 @@ function handleSticker(message, replyToken) {
   return replyText(replyToken, 'Got Sticker');
 }
 
-const port = process.env.PORT;
-
-redis_client.on("error", function (err) {
-    console.log("Error " + err);
-});
-
-redis_client.set("string key", "string val", redis.print);
-redis_client.hset("hash key", "hashtest 1", "some value", redis.print);
-redis_client.hset(["hash key", "hashtest 2", "some other value"], redis.print);
-redis_client.hkeys("hash key", function (err, replies) {
-    console.log(replies.length + " replies:");
-    replies.forEach(function (reply, i) {
-        console.log("    " + i + ": " + reply);
-    });
-    redis_client.quit();
-});
-
+const port = process;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
 });
