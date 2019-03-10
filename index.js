@@ -49,12 +49,27 @@ const replyText = (token, texts) => {
 };
 
 // callback function to handle a single event
+var resultText;
+
 function handleEvent(event) {
   switch (event.type) {
     case 'message':
       const message = event.message;
       switch (message.type) {
         case 'text':
+          if(message.text=='' || message.text == null  || message.text){
+            return handleText(message, event.replyToken);
+          }
+          redis.get(message.text, function (error, result) {
+            if (error) {
+              console.log(error);
+              throw error;
+            }
+            if(result!='' ||result!=null){
+              resultText = result;
+            }
+            console.log('GET result ->' + resultText);
+          });
           return handleText(message, event.replyToken);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
@@ -88,19 +103,7 @@ function handleEvent(event) {
 
 
 function handleText(message, replyToken) {
-    var resultText;
-    redis.get(message.text, function (error, result) {
-      if (error) {
-        console.log(error);
-        throw error;
-      }
-      resultText= result;
-      console.log('GET result ->' + resultText);
-    });
-    if(resultText=='' || resultText == null ){
-      return replyText(replyToken, message);
-    }
-    return replyText(replyToken, resultText);
+  return replyText(replyToken, resultText);
 }
 
 function handleImage(message, replyToken) {
