@@ -12,6 +12,9 @@ var rtg   = require("url").parse(process.env.REDIS_URL);
 var redis = require("redis").createClient(rtg.port, rtg.hostname);
 redis.auth(rtg.auth.split(":")[1]);
 console.log(process.env.REDIS_URL);
+redis.on('connect', function() {
+    console.log('Redis client connected');
+});
 
 // webhook callback
 app.post('/webhook', line.middleware(config), (req, res) => {
@@ -56,6 +59,7 @@ function handleEvent(event) {
           console.log('//////////////');
           redis.get(message.text, function (err, reply) {
             console.log(reply);
+            testText;
           });
           if(testText=='' || testText == null  || testText){
             return handleText(message, event.replyToken);
