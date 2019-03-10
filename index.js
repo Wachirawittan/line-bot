@@ -9,8 +9,8 @@ const client = new line.Client(config);
 const app = express();
 
 var rtg   = require("url").parse(process.env.REDIS_URL);
-var redis = require("redis"),
-redis_client = redis.createClient(rtg.port, rtg.hostname);
+var redis = require("redis");
+var redis_client = redis.createClient(rtg.port, rtg.hostname);
 redis.auth(rtg.auth.split(":")[1]);
 
 
