@@ -90,14 +90,14 @@ function handleEvent(event) {
 }
 
 function handleText(message, replyToken) {
-  reply_result=redis_client.get(message.text, function(err, reply) {
+  input_text = message.text;
+  client.get(input_text, function(err, reply) {
+    if (reply==null) {
+      return replyText(replyToken, message.text);
+    }
     console.log(reply);
+    return replyText(replyToken, reply);
   });
-  if(reply_result==""){
-    return replyText(replyToken, message.text);
-  }else if (reply_result!=null){
-    return replyText(replyToken, reply_result);
-  }
   return replyText(replyToken, message.text);
 }
 
