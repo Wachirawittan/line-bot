@@ -89,10 +89,11 @@ function handleEvent(event) {
   }
 }
 
-function handleText(message, replyToken) {
-  input_text = message.text;
 
-  return replyText(replyToken, input_text);
+
+function handleText(message, replyToken) {
+  input_text = message.text.toString();
+  return replyText(replyToken, message.text);
 }
 
 function handleImage(message, replyToken) {
