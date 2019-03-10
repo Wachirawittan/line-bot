@@ -8,6 +8,7 @@ const config = require('./config.json');
 const client = new line.Client(config);
 var redis = require("redis"),
     redis_client = redis.createClient(process.env.REDIS_URL);
+var client = require('redis').createClient(process.env.REDIS_URL);
 const app = express();
 
 // webhook callback
@@ -51,14 +52,14 @@ function handleEvent(event) {
         case 'text':
           var testText;
           console.log('//////////////');
-          console.log(redis_client.connect());
-          redis_client.get(message.text, function (err, reply) {
+          console.log(client.connect());
+          client.get(message.text, function (err, reply) {
             console.log(reply);
             console.log(reply.toString());
             testText = reply.toString();
           });
           console.log('//////////////');
-          redis_client.end();
+          client.end();
           if(testText=='' || testText == null  || testText){
             return handleText(message, event.replyToken);
           }
