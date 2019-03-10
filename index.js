@@ -55,16 +55,18 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case 'text':
-          var testText;
+          var resultText;
           console.log('//////////////');
           redis.get(message.text, function (error, result) {
             if (error) {
               console.log(error);
               throw error;
             }
-            console.log('GET result ->' + result);
+            resultText = result;
+            console.log('GET result ->' + resultText);
           });
           if(testText=='' || testText == null  || testText){
+            console.log(message);
             return handleText(message, event.replyToken);
           }
           return handleText(testText, event.replyToken);
