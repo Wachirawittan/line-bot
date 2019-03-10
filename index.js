@@ -8,15 +8,7 @@ const config = require('./config.json');
 const client = new line.Client(config);
 const app = express();
 var redis_client = require('redis').createClient(process.env.REDIS_URL);
-
-
-redis_Client.on('ready',function() {
- console.log("Redis is ready");
-});
-
-redis_Client.on('error',function() {
- console.log("Error in Redis");
-});
+console.log(process.env.REDIS_URL);
 
 // webhook callback
 app.post('/webhook', line.middleware(config), (req, res) => {
