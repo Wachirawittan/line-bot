@@ -95,7 +95,7 @@ function handleText(message, replyToken) {
   });
   if(reply_result==""){
     return replyText(replyToken, message.text);
-  }else if (){
+  }else if (reply_result!=null){
     return replyText(replyToken, reply_result);
   }
   return replyText(replyToken, message.text);
