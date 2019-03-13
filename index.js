@@ -55,8 +55,8 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case 'text':
-          var resultText,input;
-          const checkdb = (message.text) => {
+          var resultText,input,checkdb;
+          checkdb = (message.text) => {
             redis.get(message.text,function(error,result){
               console.log('GET result ->' + result);
             });
