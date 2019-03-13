@@ -68,7 +68,7 @@ function handleEvent(event) {
           }
           return handleText(message, event.replyToken);
         });
-        redis.end();
+        return handleText(message, event.replyToken);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
