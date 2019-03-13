@@ -76,10 +76,28 @@ function handleEvent(event) {
   }
 }
 
-
-
 function handleText(message, replyToken) {
   return replyText(replyToken, message.text);
+}
+
+function handleImage(message, replyToken) {
+  return replyText(replyToken, 'Got Image');
+}
+
+function handleVideo(message, replyToken) {
+  return replyText(replyToken, 'Got Video');
+}
+
+function handleAudio(message, replyToken) {
+  return replyText(replyToken, 'Got Audio');
+}
+
+function handleLocation(message, replyToken) {
+  return replyText(replyToken, 'Got Location');
+}
+
+function handleSticker(message, replyToken) {
+  return replyText(replyToken, 'Got Sticker');
 }
 
 const port = process.env.PORT;
