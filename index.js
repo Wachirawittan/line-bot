@@ -59,7 +59,6 @@ function handleEvent(event) {
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
-
     default:
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
@@ -68,20 +67,22 @@ function handleEvent(event) {
 
 
 function handleText(message, replyToken) {
-  var resultText;
-  redis.get(message.text, function (error, result) {
+  var resultText,resultTextreply;
+  resultText=message.text;
+  redis.get(resultText, function (error, result) {
     if (error) {
       console.log(error);
       throw error;
     }
     console.log('GET result ->' + result);
-    if(result!=null){
-      resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+result+" แคลลอรี่";
-    }else{
-      resultText = message.text;
-    }
+    resultText=result;
   });
-  return replyText(replyToken, resultText);
+  if(resultText!=null){
+    resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+result+" แคลลอรี่";
+  }else{
+    resultTextreply = message.text;
+  }
+  return replyText(replyToken, resultTextreply);
 }
 
 function handleImage(message, replyToken) {
