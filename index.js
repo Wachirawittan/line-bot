@@ -75,14 +75,15 @@ function handleText(message, replyToken) {
     }
     console.log('GET result inredis ->' + result);
     resultText=result;
-    console.log('GET result outredis->' + resultText);
-  });
 
-  if(resultText!=null&&resultText!=''){
-    resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
-  }else{
-    resultTextreply = message.text;
-  }
+  }).then(
+    console.log('GET result outredis->' + resultText);
+    if(resultText!=null&&resultText!=''){
+      resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
+    }else{
+      resultTextreply = message.text;
+    }
+  );
   return replyText(replyToken, resultTextreply);
 }
 
