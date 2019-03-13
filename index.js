@@ -67,7 +67,7 @@ function handleEvent(event) {
             resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+checkdb+" แคลลอรี่";
             console.log(resultText);
           }
-          return replyText(event.replyToken, resultText);
+          return handleText(message, event.replyToken);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
