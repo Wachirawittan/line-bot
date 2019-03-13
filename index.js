@@ -61,7 +61,7 @@ function handleEvent(event) {
       switch (message.type) {
         case 'text':
           var resultText;
-          const checkdb = queryfromdb(message.text);
+          var checkdb = queryfromdb(message.text);
           if(checkdb!=null){
             resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+checkdb+" แคลลอรี่";
             return replyText(event.replyToken, resultText);
