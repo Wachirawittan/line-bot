@@ -72,8 +72,8 @@ function getresult(input_Message){
   return result;
 }
 
-function handleText(message, replyToken)
-  var resultTextreply;
+function handleText(message, replyToken) {
+  varesultTextreply;
   getresult(message.text).then((result)=>{
     console.log('GET result outredis->' + result);
     if(result!=null&&result!=''){
