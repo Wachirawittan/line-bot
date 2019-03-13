@@ -69,7 +69,7 @@ function handleEvent(event) {
           input=message.text;
           console.log("///////");
           console.log("input : "+input);
-          console.log("from db : "+checkdb;
+          console.log("from db : "+checkdb);
           console.log("///////");
           if(checkdb!=null){
             resultText = "จำนวนแคลลอรี่ของ "+input+" เท่ากับ "+checkdb+" แคลลอรี่";
