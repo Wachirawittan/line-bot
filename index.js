@@ -48,12 +48,6 @@ const replyText = (token, texts) => {
   ));
 };
 
-function queryfromdb(message){
-  redis.get(message,function(error,result){
-    console.log('GET result ->' + result);
-    return result;
-  });
-}
 // callback function to handle a single event
 function handleEvent(event) {
   switch (event.type) {
@@ -61,13 +55,20 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case 'text':
-          var resultText;
-          var checkdb = queryfromdb(message.text);
-          if(checkdb!=null){
-            resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+checkdb+" แคลลอรี่";
-            console.log(resultText);
+        var resultText;
+        redis.get(message.text, function (error, result) {
+          if (error) {
+            console.log(error);
+            throw error;
           }
-          return handleText(message, event.replyToken);
+          resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+result+" แคลลอรี่";
+          console.log('GET result ->' + result);
+          if(result==null){
+            return handleText(message, event.replyToken);
+          }else if (result!=null){
+            return replyText(event.replyToken, resultText);
+          }
+        });
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
