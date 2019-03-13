@@ -56,19 +56,19 @@ function handleEvent(event) {
       switch (message.type) {
         case 'text':
         var resultText;
-        redis.get(message.text, function (error, result) {
-          if (error) {
-            console.log(error);
-            throw error;
-          }
-          resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+result+" แคลลอรี่";
-          console.log('GET result ->' + result);
-          if(result!=null){
+          redis.get(message.text, function (error, result) {
+            if (error) {
+              console.log(error);
+              throw error;
+            }
+            resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+result+" แคลลอรี่";
+            console.log('GET result ->' + result);
             return replyText(event.replyToken, resultText);
+          });
+          if(message.text=='' || message.text == null  || message.text){
+            return handleText(message, event.replyToken);
           }
-          return handleText(message, event.replyToken);
-        });
-        return handleText(message, event.replyToken);
+          return handleText(testText, event.replyToken);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
