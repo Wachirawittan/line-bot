@@ -45,7 +45,7 @@ const replyText = (token, texts) => {
   return client.replyMessage((
     token,
     texts.map((text) => ({ type: 'text', text }))
-  );
+  ));
 };
 
 function queryfromredis(message){
@@ -56,8 +56,9 @@ function queryfromredis(message){
       throw error;
     }
     console.log('GET result ->' + result);
-    resultText=result;
   });
+  resultText=result;
+  return resultText;
 }
 
 // callback function to handle a single event
