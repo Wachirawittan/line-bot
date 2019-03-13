@@ -73,10 +73,10 @@ function handleText(message, replyToken) {
       console.log(error);
       throw error;
     }
-    console.log('GET result ->' + result);
+    console.log('GET result inredis ->' + result);
     resultText=result;
   });
-    console.log('GET result ->' + resultText);
+    console.log('GET result outredis->' + resultText);
   if(resultText!=null&&resultText!=''){
     resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
   }else{
