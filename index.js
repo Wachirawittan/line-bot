@@ -49,14 +49,16 @@ const replyText = (token, texts) => {
 };
 
 function queryfromredis(message){
+  var resultText;
   redis.get(message, function (error, result) {
     if (error) {
       console.log(error);
       throw error;
     }
     console.log('GET result ->' + result);
-  return result;
+    resultText=result;
   }
+  return resultText;
 }
 
 // callback function to handle a single event
