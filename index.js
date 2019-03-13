@@ -70,13 +70,11 @@ function handleEvent(event) {
         case 'text':
           var resultText,input,checkdb;
           checkdb=queryfromredis(message.text);
-          input = message.text;
-          if(checkdb!=null && checkdb!=''){
+          if(checkdb!=null){
             resultText = "จำนวนแคลลอรี่ของ "+input+" เท่ากับ "+checkdb+" แคลลอรี่";
-          }else{
-            resultText=message.text;
+            return replyText(event.replyToken, resultText);
           }
-          return replyText(event.replyToken, resultText);
+          return replyText(event.replyToken,message.text);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
