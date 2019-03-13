@@ -49,8 +49,9 @@ const replyText = (token, texts) => {
 };
 
 function queryfromdb(message){
-  return redis.get(message,function(error,result){
+  redis.get(message,function(error,result){
     console.log('GET result ->' + result);
+    return result;
   });
 }
 // callback function to handle a single event
