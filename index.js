@@ -48,7 +48,7 @@ const replyText = (token, texts) => {
   );
 };
 
-function query(message){
+function queryfromredis(message){
   redis.get(message, function (error, result) {
     if (error) {
       console.log(error);
@@ -56,6 +56,7 @@ function query(message){
     }
     console.log('GET result ->' + result);
   return result;
+  }
 }
 
 // callback function to handle a single event
@@ -77,7 +78,6 @@ function handleEvent(event) {
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
-
     default:
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
