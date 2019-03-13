@@ -63,12 +63,12 @@ function handleEvent(event) {
           }
           resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+result+" แคลลอรี่";
           console.log('GET result ->' + result);
-          if(result==null){
-            return handleText(message, event.replyToken);
-          }else if (result!=null){
+          if(result!=null){
             return replyText(event.replyToken, resultText);
           }
+          return handleText(message, event.replyToken);
         });
+        redis.end();
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
