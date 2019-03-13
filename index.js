@@ -55,34 +55,33 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case 'text':
-          return handleText(message, event.replyToken);
+          var resultText;
+          redis.get(message.text, function (error, result) {
+            if (error) {
+              console.log(error);
+              throw error;
+            }
+            resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+result+" แคลลอรี่";
+            console.log('GET result ->' + result);
+            return replyText(event.replyToken, resultText);
+          });
+          if(message.text=='' || message.text == null  || message.text){
+            return handleText(message, event.replyToken);
+          }
+          return handleText(testText, event.replyToken);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
+
     default:
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
 
 
-function getresult(input_Message){
-  redis.get(input_Message, function (error, result) {
-    console.log('GET result inredis ->' + result);
-  });
-  return result;
-}
 
 function handleText(message, replyToken) {
-  var esultTextreply;
-  getresult(message.text).then((result)=>{
-    console.log('GET result outredis->' + result);
-    if(result!=null&&result!=''){
-      resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
-    }else{
-      resultTextreply = message.text;
-    }
-  });
-  return replyText(replyToken, resultTextreply);
+  return replyText(replyToken, message.text);
 }
 
 function handleImage(message, replyToken) {
