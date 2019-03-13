@@ -48,15 +48,6 @@ const replyText = (token, texts) => {
   ));
 };
 
-function queryfromredis(message){
-  var resultText;
-  redis.get(message, function (error, result) {
-    console.log('GET result ->' + result);
-    resultText=result;
-  });
-  return resultText;
-}
-
 // callback function to handle a single event
 function handleEvent(event) {
   switch (event.type) {
@@ -65,7 +56,11 @@ function handleEvent(event) {
       switch (message.type) {
         case 'text':
           var resultText,input;
-          const checkdb=queryfromredis(message.text);
+          const checkdb = message.text => {
+            redis.get(message.text,function(error,result){
+              console.log('GET result ->' + result);
+            });
+          };
           input=message.text;
           console.log("///////");
           console.log("input : "+input);
