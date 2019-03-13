@@ -57,8 +57,7 @@ function queryfromredis(message){
     }
     console.log('GET result ->' + result);
     resultText=result;
-  }
-  return resultText;
+  });
 }
 
 // callback function to handle a single event
