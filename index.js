@@ -69,7 +69,7 @@ function handleEvent(event) {
       switch (message.type) {
         case 'text':
           var resultText,input,checkdb;
-          checkdb=query(message.text);
+          checkdb=queryfromredis(message.text);
           input = message.text;
           if(checkdb!=null && checkdb!=''){
             resultText = "จำนวนแคลลอรี่ของ "+input+" เท่ากับ "+checkdb+" แคลลอรี่";
