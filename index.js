@@ -71,14 +71,13 @@ function handleText(message, replyToken) {
   redis.get(message.text, function (error, result) {
     console.log('GET result inredis ->' + result);
     resultText=result;
-  }).then((resultText)=>{
-    console.log('GET result outredis->' + resultText);
-    if(resultText!=null&&resultText!=''){
-      resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
-    }else{
-      resultTextreply = message.text;
-    }
-  });
+  })
+  console.log('GET result outredis->' + resultText);
+  if(resultText!=null&&resultText!=''){
+    resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
+  }else{
+    resultTextreply = message.text;
+  }
   return replyText(replyToken, resultTextreply);
 }
 
