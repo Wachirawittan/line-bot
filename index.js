@@ -42,10 +42,10 @@ app.post('/webhook', line.middleware(config), (req, res) => {
 // simple reply function
 const replyText = (token, texts) => {
   texts = Array.isArray(texts) ? texts : [texts];
-  return client.replyMessage((
+  return client.replyMessage(
     token,
     texts.map((text) => ({ type: 'text', text }))
-  ));
+  );
 };
 
 // callback function to handle a single event
@@ -55,7 +55,7 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case 'text':
-        var resultText;
+          var resultText;
           redis.get(message.text, function (error, result) {
             if (error) {
               console.log(error);
@@ -72,10 +72,13 @@ function handleEvent(event) {
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
+
     default:
       throw new Error(`Unknown event: ${JSON.stringify(event)}`);
   }
 }
+
+
 
 function handleText(message, replyToken) {
   return replyText(replyToken, message.text);
