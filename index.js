@@ -69,19 +69,16 @@ function handleEvent(event) {
 function handleText(message, replyToken) {
   var resultText,resultTextreply;
   redis.get(message.text, function (error, result) {
-    if (error) {
-      console.log(error);
-      throw error;
-    }
     console.log('GET result inredis ->' + result);
     resultText=result;
+  }).then((resultText)=>{
+    console.log('GET result outredis->' + resultText);
+    if(resultText!=null&&resultText!=''){
+      resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
+    }else{
+      resultTextreply = message.text;
+    }
   });
-  console.log('GET result outredis->' + resultText);
-  if(resultText!=null&&resultText!=''){
-    resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
-  }else{
-    resultTextreply = message.text;
-  }
   return replyText(replyToken, resultTextreply);
 }
 
