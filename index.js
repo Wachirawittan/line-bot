@@ -51,10 +51,6 @@ const replyText = (token, texts) => {
 function queryfromredis(message){
   var resultText;
   redis.get(message, function (error, result) {
-    if (error) {
-      console.log(error);
-      throw error;
-    }
     console.log('GET result ->' + result);
     resultText=result;
   });
@@ -68,10 +64,15 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case 'text':
-          var resultText,input,checkdb;
-          checkdb=queryfromredis(message.text);
+          var resultText,input;
+          const checkdb=queryfromredis(message.text);
+          input=message.text;
+          console.log("///////");
+          console.log("input : "+input);
+          console.log("from db : "+checkdb.toString());
+          console.log("///////");
           if(checkdb!=null){
-            resultText = "จำนวนแคลลอรี่ของ "+input+" เท่ากับ "+checkdb+" แคลลอรี่";
+            resultText = "จำนวนแคลลอรี่ของ "+input+" เท่ากับ "+checkdb.toString()+" แคลลอรี่";
             return replyText(event.replyToken, resultText);
           }
           return replyText(event.replyToken,message.text);
