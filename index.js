@@ -65,19 +65,23 @@ function handleEvent(event) {
 }
 
 
-
-function handleText(message, replyToken) {
-  var resultText,resultTextreply;
-  redis.get(message.text, function (error, result) {
+function getresult(input_Message){
+  redis.get(input_Message, function (error, result) {
     console.log('GET result inredis ->' + result);
-    resultText=result;
-  })
-  console.log('GET result outredis->' + resultText);
-  if(resultText!=null&&resultText!=''){
-    resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
-  }else{
-    resultTextreply = message.text;
-  }
+  });
+  return result;
+}
+
+function handleText(message, replyToken)
+  var resultTextreply;
+  getresult(message.text).then((result)=>{
+    console.log('GET result outredis->' + result);
+    if(result!=null&&result!=''){
+      resultTextreply = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+resultText+" แคลลอรี่";
+    }else{
+      resultTextreply = message.text;
+    }
+  });
   return replyText(replyToken, resultTextreply);
 }
 
