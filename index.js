@@ -68,8 +68,7 @@ function handleEvent(event) {
 
 function handleText(message, replyToken) {
   var resultText,resultTextreply;
-  resultText=message.text;
-  redis.get(resultText, function (error, result) {
+  redis.get(message.text, function (error, result) {
     if (error) {
       console.log(error);
       throw error;
