@@ -55,18 +55,17 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case 'text':
-          var resultText,resultText2;
+          var resultText;
           redis.get(message.text, function (error, result) {
             if (error) {
               console.log(error);
               throw error;
             }
-            resultText2=result;
             resultText = "จำนวนแคลลอรี่ของ "+message.text+" เท่ากับ "+result+" แคลลอรี่";
             console.log('GET result ->' + result);
             return replyText(event.replyToken, resultText);
           });
-          if(resultText2==null){
+          if(message.text=='' || message.text == null  || message.text){
             return handleText(message, event.replyToken);
           }
           return handleText(testText, event.replyToken);
